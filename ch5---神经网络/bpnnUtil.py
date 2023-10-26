@@ -43,7 +43,7 @@ def cross_entry_sigmoid(y_hat_, y_):
     m = y_.shape[0]
     loss = -(np.dot(y_.T, np.log(y_hat_)) + np.dot(1 - y_.T, np.log(1 - y_hat_))) / m
 
-    return np.squeeze(loss) # 去除冗余维度，将(1, 1) 的数组变成标量
+    return np.squeeze(loss)  # 去除冗余维度，将(1, 1) 的数组变成标量
 
 
 def cross_entry_softmax(y_hat_, y_):
@@ -165,13 +165,13 @@ def update_parameters_with_sgd_adam(parameters_, grads_, velcoity, square_grad, 
         velcoity['dW' + str(i + 1)] = beta1 * velcoity['dW' + str(i + 1)] + (1 - beta1) * grads_['dW' + str(i + 1)]
         velcoity['db' + str(i + 1)] = beta1 * velcoity['db' + str(i + 1)] + (1 - beta1) * grads_['db' + str(i + 1)]
 
-        vw_correct = velcoity['dW' + str(i + 1)] / (1 - np.power(beta1, epoch))         # 这里是对迭代初期的梯度进行修正
+        vw_correct = velcoity['dW' + str(i + 1)] / (1 - np.power(beta1, epoch))  # 这里是对迭代初期的梯度进行修正
         vb_correct = velcoity['db' + str(i + 1)] / (1 - np.power(beta1, epoch))
 
         square_grad['dW' + str(i + 1)] = beta2 * square_grad['dW' + str(i + 1)] + (1 - beta2) * (
-                    grads_['dW' + str(i + 1)] ** 2)
+                grads_['dW' + str(i + 1)] ** 2)
         square_grad['db' + str(i + 1)] = beta2 * square_grad['db' + str(i + 1)] + (1 - beta2) * (
-                    grads_['db' + str(i + 1)] ** 2)
+                grads_['db' + str(i + 1)] ** 2)
 
         sw_correct = square_grad['dW' + str(i + 1)] / (1 - np.power(beta2, epoch))
         sb_correct = square_grad['db' + str(i + 1)] / (1 - np.power(beta2, epoch))
@@ -182,7 +182,7 @@ def update_parameters_with_sgd_adam(parameters_, grads_, velcoity, square_grad, 
     return parameters_, velcoity, square_grad
 
 
-def set_ax_gray(ax): 
+def set_ax_gray(ax):
     """
     用于设置绘图的轴样式，使其具有灰色背景、半透明、隐藏坐标轴线，以及添加水平虚线网格。"""
     ax.patch.set_facecolor("gray")
